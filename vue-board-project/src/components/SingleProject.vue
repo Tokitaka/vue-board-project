@@ -30,12 +30,13 @@ export default {
                 body: JSON.stringify({ idx: this.boardList.idx }),
             }
 
-            fetch('this.uri', requestOptions)
+            fetch(this.uri, requestOptions)
             .then(res => {
                 if (!res.ok) {
                     throw new Error('게시물이 삭제되지 않았습니다. 재시도해주세요')
                 }
             })
+            .then(() => this.$emit('delete', this.boardList.idx))
             .catch((err) => console.log(err.message));
         }
     }

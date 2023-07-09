@@ -3,7 +3,7 @@
     <div v-if="loading">Loading...</div>
     <div v-else>
       <div v-for="boardList in boardLists" :key="boardList.idx">
-        <SingleProject :boardList="boardList" />
+        <SingleProject :boardList="boardList" @delete="handleDelete"/>
       </div>
     </div>
   </div>
@@ -31,6 +31,13 @@ export default {
         console.log(err.message);
         this.loading = false;
       });
+  },
+  methods: {
+    handleDelete(idx) {
+      this.boardLists = this.boardLists.filter((boardList) => {
+          return boardList.idx != idx
+      })
+    }
   }
 };
 </script>
