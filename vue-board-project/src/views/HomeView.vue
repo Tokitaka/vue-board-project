@@ -3,14 +3,17 @@
     <div v-if="loading">Loading...</div>
     <div v-else>
       <div v-for="project in projects" :key="project.idx">
-        <p>{{ project.title }}</p>
+        <SingleProject :project="project" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import SingleProject from '../components/SingleProject.vue'
 export default {
+  name: 'Home',
+  components: {SingleProject},
   data() {
     return {
       loading: true,
