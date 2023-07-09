@@ -2,8 +2,8 @@
   <div>
     <div v-if="loading">Loading...</div>
     <div v-else>
-      <div v-for="project in projects" :key="project.idx">
-        <SingleProject :project="project" />
+      <div v-for="boardList in boardLists" :key="boardList.idx">
+        <SingleProject :boardList="boardList" />
       </div>
     </div>
   </div>
@@ -17,14 +17,14 @@ export default {
   data() {
     return {
       loading: true,
-      projects: []
+      boardLists: []
     };
   },
   mounted() {
     fetch('https://dev.safeean.com:63101/test/post/list?startRow=1')
       .then(res => res.json())
       .then(data => {
-        this.projects = data.data;
+        this.boardLists = data.data;
         this.loading = false;
       })
       .catch(err => {
