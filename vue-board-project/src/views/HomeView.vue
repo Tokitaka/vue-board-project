@@ -63,9 +63,12 @@ export default {
       }
     },
     handleDelete(idx) {
-      this.boardLists = this.boardLists.filter((boardList) => {
+      const confirmed = confirm("삭제하시겠습니까?")
+      if (confirmed) {
+        this.boardLists = this.boardLists.filter((boardList) => {
           return boardList.idx != idx
       })
+      }
     }
   }
 };
