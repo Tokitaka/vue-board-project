@@ -3,7 +3,9 @@
         <div class="actions">
             <h3>{{ boardList.title }}</h3>
             <div class="icons">
-                <span class="material-symbols-outlined">edit</span>
+                <router-link :to="{ name: 'updateList', params: {idx: boardList.idx} }">
+                    <span class="material-symbols-outlined">edit</span>
+                </router-link>
                 <span @click="deleteList" class="material-symbols-outlined">delete</span>
             </div>
         </div>

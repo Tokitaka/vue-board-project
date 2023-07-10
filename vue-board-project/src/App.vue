@@ -1,6 +1,25 @@
 <template>
-  <router-view/>
+  <Header :pageTitle="pageTitle"/>
+  <router-view @setPageTitle="updatePageTitle"/>
 </template>
+
+<script>
+import Header from './components/Header.vue'
+
+export default {
+  components: {Header},
+  data() {
+    return {
+      pageTitle: '게시판'
+    }
+  },
+  methods: {
+    updatePageTitle(pageTitle) {
+      this.pageTitle = pageTitle;
+    }
+  }
+};
+</script>
 
 <style>
 body {
