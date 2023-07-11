@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AddList from '../views/AddList.vue'
 import UpdateList from '../views/UpdateList.vue'
+import ListDetail from '../views/ListDetail.vue'
 
 const routes = [
   {
@@ -18,6 +19,12 @@ const routes = [
     path: '/update/:idx',
     name: 'updateList',
     component: UpdateList,
+    props: true
+  },
+  {
+    path: '/detail/:idx',
+    name: 'listDetail',
+    component: ListDetail,
     props: true
   }
 ]

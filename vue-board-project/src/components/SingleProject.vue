@@ -1,7 +1,9 @@
 <template>
     <div class="boardList">
         <div class="actions">
-            <h3>{{ boardList.title }}</h3>
+            <router-link :to="{ name: 'listDetail', params: {idx: boardList.idx}}" class="custom-link">
+                <h3>{{ boardList.title }}</h3>
+            </router-link>
             <div class="icons">
                 <router-link :to="{ name: 'updateList', params: {idx: boardList.idx} }">
                     <span class="material-symbols-outlined">edit</span>
@@ -55,9 +57,12 @@ export default {
     border-radius: 8px;
     box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
 }
-
+.custom-link {
+    text-decoration: none;
+}
 h3 {
     cursor: pointer;
+    color: black;
 }
 
 .actions {

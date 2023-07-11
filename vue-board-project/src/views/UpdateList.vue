@@ -4,6 +4,9 @@
         <input type="text" v-model="title" required>
         <label>Content :</label>
         <textarea v-model="content" required></textarea>
+        <!-- upload image -->
+        <label>Upload image</label>
+        <input type="file" @change="handleChange">
         <button>게시글 수정</button>
     </form>
 </template>
@@ -11,7 +14,7 @@
 <script>
 export default {
     props: ['idx'],
-    data() {
+    data() { 
         return {
             title: '',
             content: '',
@@ -29,7 +32,7 @@ export default {
                 console.log(error);
             });
 
-            this.$emit('setPageTitle', '게시판 수정');
+            this.$emit('setPageTitle', '게시글 수정');
     },
     methods: {
         handleSubmit() {

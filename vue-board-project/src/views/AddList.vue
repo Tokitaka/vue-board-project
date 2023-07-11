@@ -1,19 +1,24 @@
 <template>
-  <form @submit.prevent="handleSubmit">
-    <label>Title :</label>
-    <input type="text" v-model="title" required>
-    <label>Content :</label>
-    <textarea v-model="content" required></textarea>
-    <button>게시글 작성</button>
-  </form>
+    <form @submit.prevent="handleSubmit">
+        <label>Title :</label>
+        <input type="text" v-model="title" required>
+        <label>Content :</label>
+        <textarea v-model="content" required></textarea>
+        <!-- upload image -->
+        <label>Upload image</label>
+        <div class="imagePreview" :style="{ 'background-image': `url(${previewImage})` }" @click="selectImage"></div>
+        <input ref="fileInput" type="file" @input="pickFile">
+        <button>게시글 작성</button>
+    </form>
 </template>
 
 <script>
 export default {
     data() {
         return {
-            title:'',
-            content:'',
+            title: '',
+            content: '',
+            previewImage: null
         }
     },
     methods: {
@@ -24,11 +29,26 @@ export default {
             }
             fetch('https://dev.safeean.com:63101/test/post', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json'},
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(boardList)
-            }).then(()=> {
+            }).then(() => {
                 this.$router.push('/')
             }).catch((err) => console.log(err))
+        },
+        pickFile(e) {
+            let input = this.$refs.fileInput
+            let file = input.files
+            if (file && file[0]) {
+                let reader = new FileReader
+                reader.onload = e => {
+                    this.previewImage = e.target.result
+                }
+                reader.readAsDataURL(file[0])
+                this.$emit('input', file[0])
+            }
+        },
+        selectImage() {
+            this.$refs.fileInput.click()
         }
     },
     mounted() {
@@ -43,6 +63,7 @@ form {
     padding: 20px;
     border-radius: 10px;
 }
+
 label {
     display: block;
     color: #bbb;
@@ -50,12 +71,14 @@ label {
     font-size: 13px;
     margin: 15px 0 12px 0;
 }
+
 input {
     padding: 10px;
     border: 1px solid #ddd;
     width: 100%;
     box-sizing: border-box;
 }
+
 textarea {
     border: 1px solid #ddd;
     padding: 10px;
@@ -63,6 +86,7 @@ textarea {
     height: 100%;
     box-sizing: border-box;
 }
+
 form button {
     display: block;
     margin: 20px auto 0;
@@ -75,5 +99,12 @@ form button {
     font-size: 13px;
     cursor: pointer;
 }
-
+.imagePreview {
+    width: 100px;
+    height: 80px;
+    display: block;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center center;
+}
 </style>
