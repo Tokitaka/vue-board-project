@@ -4,7 +4,7 @@
         <input type="text" v-model="title" required>
         <label>Content :</label>
         <textarea v-model="content" required></textarea>
-        <button @click="handleUpdate">게시글 수정</button>
+        <button>게시글 수정</button>
     </form>
 </template>
 

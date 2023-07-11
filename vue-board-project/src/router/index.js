@@ -15,7 +15,7 @@ const routes = [
     component: AddList
   },
   {
-    path: '/list/:idx',
+    path: '/update/:idx',
     name: 'updateList',
     component: UpdateList,
     props: true

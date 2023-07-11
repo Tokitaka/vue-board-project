@@ -26,13 +26,14 @@ export default {
     },
     methods: {
         deleteList() {
+            const confirmed = confirm("삭제하시겠습니까?")
             const requestOptions = {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify({ idx: this.boardList.idx }),
             }
-
-            fetch(this.uri, requestOptions)
+            if (confirmed) {
+                fetch(this.uri, requestOptions)
             .then(res => {
                 if (!res.ok) {
                     throw new Error('게시물이 삭제되지 않았습니다. 재시도해주세요')
@@ -40,6 +41,7 @@ export default {
             })
             .then(() => this.$emit('delete', this.boardList.idx))
             .catch((err) => console.log(err.message));
+            }
         }
     }
 }
