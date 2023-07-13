@@ -5,9 +5,14 @@
         <label>Content :</label>
         <textarea v-model="content" required></textarea>
         <!-- upload image -->
-        <label>Upload image</label>
-        <div class="imagePreview" :style="{ 'background-image': `url(${previewImage})` }" @click="selectImage"></div>
-        <input ref="fileInput" type="file" @input="pickFile">
+        <label for="upload-image">
+            <span class="material-symbols-outlined">add_a_photo</span>
+            이미지 추가하기
+        </label>
+        <input type="file" multiple @change="previewImage" id="upload-image" hidden>
+        <div>
+            <img class="image-preview" v-for="image in images" :key="image.id" :src="image" alt="미리보기">
+        </div>
         <button>게시글 작성</button>
     </form>
 </template>
@@ -18,7 +23,7 @@ export default {
         return {
             title: '',
             content: '',
-            previewImage: null
+            images: []
         }
     },
     methods: {
@@ -35,20 +40,13 @@ export default {
                 this.$router.push('/')
             }).catch((err) => console.log(err))
         },
-        pickFile(e) {
-            let input = this.$refs.fileInput
-            let file = input.files
-            if (file && file[0]) {
-                let reader = new FileReader
-                reader.onload = e => {
-                    this.previewImage = e.target.result
-                }
-                reader.readAsDataURL(file[0])
-                this.$emit('input', file[0])
+        previewImage(e) {
+            let file = e.target.files[0]
+            const reader = new FileReader()
+            reader.readAsDataURL(file)
+            reader.onload = (e) => {
+                this.images.push(reader.result)
             }
-        },
-        selectImage() {
-            this.$refs.fileInput.click()
         }
     },
     mounted() {
@@ -99,12 +97,9 @@ form button {
     font-size: 13px;
     cursor: pointer;
 }
-.imagePreview {
+.image-preview {
     width: 100px;
-    height: 80px;
-    display: block;
-    cursor: pointer;
-    background-size: cover;
-    background-position: center center;
+    height: 100px;
+    margin: 10px 10px;
 }
 </style>
