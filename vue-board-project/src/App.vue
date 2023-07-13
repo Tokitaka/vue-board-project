@@ -15,10 +15,10 @@ export default {
   },
   methods: {
     updatePageTitle(pageTitle) {
-      this.pageTitle = pageTitle;
+      this.pageTitle = pageTitle
     }
   }
-};
+}
 </script>
 
 <style>

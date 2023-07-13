@@ -42,7 +42,7 @@ export default {
                 }
             })
             .then(() => this.$emit('delete', this.boardList.idx))
-            .catch((err) => console.log(err.message));
+            .catch((err) => console.log(err.message))
             }
         }
     }

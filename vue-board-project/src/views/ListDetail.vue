@@ -3,6 +3,8 @@
         <input type="text" v-model="title" readonly>
         <label>Content :</label>
         <textarea v-model="content" readonly></textarea>
+        <!-- img for문 -->
+        <img src="" alt="">
 </template>
 
 <script>
@@ -23,10 +25,10 @@ export default {
                 this.content = data.data.content
             })
             .catch(error => {
-                console.log(error);
-            });
+                console.log(error)
+            })
 
-            this.$emit('setPageTitle', `게시글 ${this.idx}`);
+            this.$emit('setPageTitle', `게시글 ${this.idx}`)
     },
 }
 </script>

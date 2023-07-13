@@ -41,25 +41,25 @@ export default {
       .then(res => res.json())
       .then(data => {
         this.boardLists = data.data;
-        this.totalPages = Math.ceil(data.total / this.perPage);
-        this.loading = false;
-        console.log(data);
+        this.totalPages = Math.ceil(data.total / this.perPage)
+        this.loading = false
+        console.log(data)
       })
       .catch(err => {
-        console.log(err.message);
-        this.loading = false;
-      });
+        console.log(err.message)
+        this.loading = false
+      })
     }, 
     prevPage(){
       if (this.currentPage > 1) {
-        this.currentPage--;
-        this.fetchList();
+        this.currentPage--
+        this.fetchList()
       }
     },
     nextPage(){
       if (this.currentPage < this.totalPages) {
-        this.currentPage++;
-        this.fetchList();
+        this.currentPage++
+        this.fetchList()
       }
     },
     handleDelete(idx) {

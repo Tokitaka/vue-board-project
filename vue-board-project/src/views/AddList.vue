@@ -3,7 +3,7 @@
         <label>Title :</label>
         <input type="text" v-model="title" required>
         <label>Content :</label>
-        <textarea v-model="content" required></textarea>
+        <textarea v-model="content" maxlength="500" required></textarea>
         <!-- upload image -->
         <label for="upload-image">
             <span class="material-symbols-outlined">add_a_photo</span>
@@ -37,6 +37,7 @@ export default {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(boardList)
             }).then(() => {
+                alert('작성 완료!')
                 this.$router.push('/')
             }).catch((err) => console.log(err))
         },
@@ -50,7 +51,7 @@ export default {
         }
     },
     mounted() {
-        this.$emit('setPageTitle', '게시글 쓰기');
+        this.$emit('setPageTitle', '게시글 쓰기')
     }
 }
 </script>
